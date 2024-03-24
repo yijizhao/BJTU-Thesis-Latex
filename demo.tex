@@ -1,0 +1,159 @@
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 改自研究生院提供的博士学位论文Latex单页模板，https://gs.bjtu.edu.cn/cms/item/477.html
+% !!!第二章和第三章已总结了笔者撰写论文过程中使用的技巧及遇到的问题解决方案，建议论文撰写者仔细阅读。
+
+% 支持的学位类型：博士、学硕
+% 支持的页面格式：单面、双面
+% 单面格式：边距居中，便于PDF阅读，论文撰写、匿名送审、在线送审时用此格式。注意，学校要求，页数少于一定数量时则需要用此格式打印纸质版。
+% 双面格式：双面打印模式，在这种模式下奇偶页左侧边距不同，会自动生成空白页，确保新章节从奇数页码开始。
+% 博士学位论文主体部分字数一般为6～10万字（含图表）；硕士学位论文主体部分字数一般为3～5万字（含图表）。
+
+% 使用说明：
+% 1. 纸质版及图书馆最终提交电子版请在demo.tex中使用twoside
+% 2. 匿名送审和在线送审的电子版，去掉twoside就是单页模板，便于电子阅读。
+% 3. 理论上硕士与博士模板通用，修改demo.tex中\documentclass命令即可，硕士使用建议再核对一下格式。
+% 4. 编译环境：在线可以用overleaf，即www.overleaf.com；离线可以用TexLive+TexStudio
+% 5. 编译请使用xelatex
+
+% 修改/完善的内容包括：
+% 1. 与最新word模板同步，添加了答辩名单页、答辩决议页
+% 2. 修正twoside中的偶数空白页页眉页脚问题，见demo.tex
+% 3. 修正页脚字体大小及间距
+% 4. 修改英文和数字字体为Times New Roman
+% 5. 设置图表描述默认为居中对齐
+% 6. 修正itemize的行距与正文一致
+% 7. 增添命令来打中文括弧，避免正文中直接写中文括号出现的文字光标错位问题
+%
+% by 赵苡积，2023.05
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\documentclass[Doctor,UTF-8]{BJTU-thesis}            %%博士，单面
+\documentclass[Doctor,UTF-8,twoside]{BJTU-thesis}     %%博士，双面
+%\documentclass[AcMaster]{BJTU-thesis}                %%学硕，单面
+%\documentclass[AcMaster,UTF-8,twoside]{BJTU-thesis}  %%学硕，双面
+
+
+%% 指定图片路径
+\graphicspath{{./figures/}}
+
+%% 添加需要的包
+
+%清除twoside中偶数空白页的页眉页脚
+\usepackage{emptypage} 
+
+%用命令来打中文括弧，避免正文中直接写中文括号出现的文字光标错位问题
+\newcommand{\cp}[1]{（#1）} %全括弧，\cp{1} -> （1）
+\newcommand{\rp}[1]{#1）}   %右括弧，\rp{1} ->  1）
+\newcommand{\refeq}[1]{（\ref{#1}）} %自定义指令，正文引用公式时的括弧为中文括弧，如公式\refeq{eq:xxx}所示 -> 如公式（2.1）所示
+
+%公式修正
+\usepackage[T1]{fontenc}  %搭配mathptmx
+\usepackage{mathptmx}     %修正部分公式中字体样式，如避免\hat的帽子间距错误，mathptmx在win和mac系统中兼容性均较好
+\usepackage[mathcal]{euscript} %花体，用scr代替cal
+
+%分块矩阵
+\usepackage{blkarray}
+
+%三线表
+\usepackage{booktabs} 
+\usepackage{makecell} %合并单元格
+\usepackage{threeparttable} %三线表，加表格脚注
+\usepackage[figuresright]{rotating} %图表旋转，超大图表需要用\begin{sidewaysfigure}和\begin{sidewaystable}旋转
+
+%图表标题居中对齐
+\usepackage[justification=centering]{caption}
+
+%中文样式的算法表格
+\usepackage[ruled]{algorithm2e}  
+\renewcommand{\algorithmcfname}{算法}  %算法表头，algorithm->算法
+\SetKwInput{KwIn}{输入}   % input  -> 输入
+\SetKwInput{KwOut}{输出}  % output -> 输出
+\SetAlgoCaptionSeparator{ ：} %表头冒号变成中文冒号
+
+% 公式符号加粗
+\newcommand{\mat}[1]{{\bf #1}}           %定义矩阵符号命令，\mat{X}
+\newcommand{\tensor}[1]{{\mathcal #1}}   %定义张量符号命令，\mat{X}
+\renewcommand{\vec}[1]{{\boldsymbol #1}} %定义向量符号命令，\mat{x}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%填写封面信息%%%%%%%%%%%%%%%%%%%%%%%%
+\author{xxx}                                %作者姓名
+\studentNumber{xxx}                         %学号
+\advisor{xxx}                               %导师姓名
+\advisorTitle{教授}                         %导师职称
+\degreeType{工学}                           %学位类型
+\major{计算机科学与技术}                     %专业
+\researchArea{数据与知识工程}                %研究方向
+\title{论文题目}                            %论文题目
+\englishtitle{The Title in English.}       %英文题目
+\datetime{xx年xx月}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+	\makecover                                                  %封面
+	\include{chapters/copyright} 								%版权声明
+	\twosideEmptyPage                                           %版权声明背面的空白页，只在双面时生效
+	\makeInfo                                                   %内封页
+	\include{chapters/committee} 								%答辩委员会名单
+	\include{chapters/thanks} 									%致谢
+	\include{chapters/abstract}   								%中文摘要
+	\include{chapters/englishabstract}  					    %英文摘要
+%	\include{chapters/preface}                                  %序言
+
+
+	\tableofcontents                                            % 目录
+    \newpage\pagenumbering{arabic}                              %页码切回阿拉伯数字
+
+    %正文
+    \include{chapters/chapter01} 								%引言
+	\include{chapters/chapter02} 								%第二章
+	\include{chapters/chapter03} 								%第三章
+	\include{chapters/chapter04} 								%第四章
+	\include{chapters/chapter05} 								%第五章
+	\include{chapters/chapter06} 								%第六章
+	\include{chapters/chapter07} 								%第七章
+
+
+	%参考文献
+	\bibliography{reference/ref}
+	
+	\backmatter %保持页面编号不变，取消后续章节编号
+
+	%\begin{appendix}
+	%	\input{chapters/appendix01} %附录
+	%\end{appendix}
+	%\include{chapters/index}        %索引
+	\include{chapters/mresume}      %作者简历
+	\include{chapters/resolution}   %答辩决议
+	\include{chapters/statement}    %独创性声明
+	\include{chapters/dataset} 	    %数据集信息					
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

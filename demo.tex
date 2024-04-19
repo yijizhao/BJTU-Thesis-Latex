@@ -78,7 +78,23 @@
 \newcommand{\tensor}[1]{{\mathcal #1}}   %定义张量符号命令，\mat{X}
 \renewcommand{\vec}[1]{{\boldsymbol #1}} %定义向量符号命令，\mat{x}
 
+% 临时补充一个定理定制：
+\newtheoremstyle{mythm}
+{} % <上方间距>若留空，则使用默认值
+{} % <下方间距>若留空，则使用默认值
+{} % <主体字体>如 \itshape
+{\parindent} % <缩进长度>若留空，则无缩进；可以使用 \parindent 进行正常段落缩进
+{\bfseries} % <定理头字体>如 \bfseries
+{：} <定理头后的标点符号>% 如点号、冒号
+{ } <定理头后的间距>% 不可留空，若设置为 { }，则表示正常词间间距；若设置为 {\newline}，则环境内容开启新行
+{} <定理头格式指定>% 一般留空
 
+\theoremstyle{mythm} % 声明定理的风格
+\newtheorem{Definition}{定义}[chapter]
+\newtheorem{Theorem}{定理}[chapter]
+\newtheorem{Lemma}{引理}[chapter]
+\newtheorem{Proof}{证明}[chapter]
+\renewcommand*{\qedsymbol}{[证毕]} % 把证明的结尾改成证毕
 
 
 
@@ -109,10 +125,10 @@
 
 
 	\tableofcontents                                            % 目录
-    \newpage\pagenumbering{arabic}                              %页码切回阿拉伯数字
+    	\newpage\pagenumbering{arabic}                              %页码切回阿拉伯数字
 
-    %正文
-    \include{chapters/chapter01} 								%引言
+    	%正文
+    	\include{chapters/chapter01} 								%引言
 	\include{chapters/chapter02} 								%第二章
 	\include{chapters/chapter03} 								%第三章
 	\include{chapters/chapter04} 								%第四章

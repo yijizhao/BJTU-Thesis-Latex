@@ -566,7 +566,8 @@ headheight=15pt
 	\@mkboth{\MakeUppercase\bibname}{\MakeUppercase\bibname}%
 	\addcontentsline{toc}{chapter}{参考文献}
 	\list{\@biblabel{\@arabic\c@enumiv}}%
-	{\settowidth\labelwidth{\@biblabel{#1}}%
+	{\def\makelabel##1{##1\hfill} % 强制标签左对齐
+		\settowidth\labelwidth{\@biblabel{#1}}%
 		\leftmargin\labelwidth
 		\advance\leftmargin\labelsep
 		\setlength{\parsep}{1mm}

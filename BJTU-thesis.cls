@@ -46,14 +46,50 @@
 \DeclareOption{twoside}{\@isTwoSidetrue}
 \ProcessOptions\relax
 \if@isTwoSide
-\LoadClass[zihao=-4,a4paper,twoside,openright,UTF8,space=auto]{ctexbook}
+\LoadClass[zihao=-4,a4paper,twoside,openright,UTF8,space=auto,fontset=none]{ctexbook}
 \else
-\LoadClass[zihao=-4,a4paper,oneside,openright,UTF8,space=auto]{ctexbook}
+\LoadClass[zihao=-4,a4paper,oneside,openright,UTF8,space=auto,fontset=none]{ctexbook}
 \fi
 
 %设置英文和数字字体为Times New Roman
 \usepackage{fontspec} 
 \setmainfont{Times New Roman}
+\setCJKmainfont[
+  Path = fonts/,
+  UprightFont = simsun.ttc,
+  BoldFont = simhei.ttf,
+  ItalicFont = simkai.ttf
+]{simsun.ttc}
+\setCJKsansfont[
+  Path = fonts/,
+  UprightFont = simhei.ttf
+]{simhei.ttf}
+\setCJKmonofont[
+  Path = fonts/,
+  UprightFont = simsun.ttc
+]{simsun.ttc}
+\setCJKfamilyfont{song}[
+  Path = fonts/,
+  UprightFont = simsun.ttc,
+  BoldFont = simhei.ttf,
+  ItalicFont = simkai.ttf
+]{simsun.ttc}
+\setCJKfamilyfont{hei}[
+  Path = fonts/,
+  UprightFont = simhei.ttf
+]{simhei.ttf}
+\setCJKfamilyfont{kai}[
+  Path = fonts/,
+  UprightFont = simkai.ttf
+]{simkai.ttf}
+\setCJKfamilyfont{fs}[
+  Path = fonts/,
+  UprightFont = stzhongs.ttf
+]{stzhongs.ttf}
+\providecommand{\songti}{\CJKfamily{song}}
+\providecommand{\heiti}{\CJKfamily{hei}}
+\providecommand{\kaishu}{\CJKfamily{kai}}
+\providecommand{\fangsong}{\CJKfamily{fs}}
 
 
 %定义使用者需要填写的标签
